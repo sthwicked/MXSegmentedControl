@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
   name: "MXSegmentedControl",
-  platforms: [.iOS(.v10)],
+  platforms: [.iOS(.v12)],
   products: [
     .library(
       name: "MXSegmentedControl",
@@ -11,12 +11,9 @@ let package = Package(
     )
   ],
   targets: [
-    .target(
+    .binaryTarget(
       name: "MXSegmentedControl",
-      path: "MXSegmentedControl",
-      publicHeadersPath: "."
+      path: "xcframework/MXSegmentedControl.xcframework"
     )
-  ],
-  swiftLanguageVersions: [.v5],
-  cLanguageStandard: .c11
+  ]
 )

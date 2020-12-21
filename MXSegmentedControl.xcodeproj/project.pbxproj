@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1C28078C2590DD540051DAF8 /* XCFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1C28078D2590DD540051DAF8 /* Build configuration list for PBXAggregateTarget "XCFramework" */;
+			buildPhases = (
+				1C2807962590DD6F0051DAF8 /* Create XCFramework */,
+			);
+			dependencies = (
+			);
+			name = XCFramework;
+			productName = XCFramework;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		9C801BC31E72BD9200E75652 /* MXSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C801BC11E72BD9200E75652 /* MXSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C801BCA1E72BDDC00E75652 /* MXSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C801BC91E72BDDC00E75652 /* MXSegmentedControl.swift */; };
@@ -50,7 +64,6 @@
 /* Begin PBXFileReference section */
 		9C801BBE1E72BD9200E75652 /* MXSegmentedControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MXSegmentedControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C801BC11E72BD9200E75652 /* MXSegmentedControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MXSegmentedControl.h; sourceTree = "<group>"; };
-		9C801BC21E72BD9200E75652 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C801BC91E72BDDC00E75652 /* MXSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXSegmentedControl.swift; sourceTree = "<group>"; };
 		9C801BD11E72F96800E75652 /* MXSegmentedControl Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MXSegmentedControl Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C801BD31E72F96800E75652 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				9C801BC11E72BD9200E75652 /* MXSegmentedControl.h */,
-				9C801BC21E72BD9200E75652 /* Info.plist */,
 				9C801BC91E72BDDC00E75652 /* MXSegmentedControl.swift */,
 				9CF63C2C1E7C01EE00C56E1B /* MXSegment.swift */,
 				9CF63C2F1E7C023200C56E1B /* MXIndicator.swift */,
@@ -210,11 +222,15 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Maxime Epain";
 				TargetAttributes = {
+					1C28078C2590DD540051DAF8 = {
+						CreatedOnToolsVersion = 12.3;
+						DevelopmentTeam = 229UWY5K4P;
+						ProvisioningStyle = Automatic;
+					};
 					9C801BBD1E72BD9200E75652 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = C75GEDTP26;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					9C801BD01E72F96800E75652 = {
 						CreatedOnToolsVersion = 8.2;
@@ -240,6 +256,7 @@
 			targets = (
 				9C801BBD1E72BD9200E75652 /* MXSegmentedControl */,
 				9C801BD01E72F96800E75652 /* Example */,
+				1C28078C2590DD540051DAF8 /* XCFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -263,6 +280,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C2807962590DD6F0051DAF8 /* Create XCFramework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Create XCFramework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Type a script or drag a script file from your workspace to insert its path.\nSCHEME_NAME=\"MXSegmentedControl\"\nFRAMEWORK_NAME=\"MXSegmentedControl\"\n\nSIMULATOR_ARCHIVE_PATH=\"${BUILD_DIR}/${CONFIGURATION}/${FRAMEWORK_NAME}-iphonesimulator.xcarchive\"\nDEVICE_ARCHIVE_PATH=\"${BUILD_DIR}/${CONFIGURATION}/${FRAMEWORK_NAME}-iphoneos.xcarchive\"\nOUTPUT_DIC=\"./xcframework/\"\n# Simulator xcarchieve\nxcodebuild archive \\\n  -scheme ${SCHEME_NAME} \\\n  -destination=\"iOS Simulator\" \\\n  -archivePath ${SIMULATOR_ARCHIVE_PATH} \\\n  -sdk iphonesimulator \\\n  SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES \n# Device xcarchieve\nxcodebuild archive \\\n  -scheme ${SCHEME_NAME} \\\n  -destination=\"iOS\" \\\n  -archivePath ${DEVICE_ARCHIVE_PATH} \\\n  -sdk iphoneos \\\n  SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES \n# Clean up old output directory\nrm -rf \"${OUTPUT_DIC}\"\n# Create xcframwork combine of all frameworks\nxcodebuild -create-xcframework \\\n  -framework ${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \\\n  -framework ${DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \\\n  -output ${OUTPUT_DIC}/${FRAMEWORK_NAME}.xcframework\n\n# FIX xcframework bug when class name is same as module name\nfind ${OUTPUT_DIC} -name \"*.swiftinterface\" -exec sed -i -e 's/MXSegmentedControl\\.//g' {} \\;\n\n# Open output directory for convenience\nopen \"${OUTPUT_DIC}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9C801BB91E72BD9200E75652 /* Sources */ = {
@@ -317,6 +355,24 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1C28078E2590DD540051DAF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 229UWY5K4P;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1C28078F2590DD540051DAF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 229UWY5K4P;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9C801BC41E72BD9200E75652 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -435,10 +491,13 @@
 		9C801BC71E72BD9200E75652 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C75GEDTP26;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -447,6 +506,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.maxep.MXSegmentedControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -456,10 +517,13 @@
 		9C801BC81E72BD9200E75652 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C75GEDTP26;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -468,6 +532,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.maxep.MXSegmentedControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 			};
@@ -504,6 +570,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1C28078D2590DD540051DAF8 /* Build configuration list for PBXAggregateTarget "XCFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C28078E2590DD540051DAF8 /* Debug */,
+				1C28078F2590DD540051DAF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9C801BB81E72BD9200E75652 /* Build configuration list for PBXProject "MXSegmentedControl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
